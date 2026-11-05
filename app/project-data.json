@@ -1,0 +1,52 @@
+{
+  "projects": [
+    {
+      "name": "Community Onboarding",
+      "owner": "Mona",
+      "status": "In progress",
+      "recentActivity": "Contributor guide draft updated · 2 hours ago",
+      "priority": "High priority",
+      "summary": "Make the first contribution easier with a clearer setup guide and a welcoming first-issue path."
+    },
+    {
+      "name": "Design System Refresh",
+      "owner": "Ari Chen",
+      "status": "Active",
+      "recentActivity": "Button and form patterns reviewed · Yesterday",
+      "priority": "Medium priority",
+      "summary": "Bring shared interface patterns together; help is welcome reviewing component examples and docs."
+    },
+    {
+      "name": "Docs Search",
+      "owner": "Sam Rivera",
+      "status": "Planning",
+      "recentActivity": "Search needs collected from maintainers · 3 days ago",
+      "priority": "Needs scoping",
+      "summary": "Explore a faster way to find answers in the docs. Contributors can help shape the initial scope."
+    },
+    {
+      "name": "Accessibility Pass",
+      "owner": "Leah Okafor",
+      "status": "In progress",
+      "recentActivity": "Keyboard navigation fixes merged · 4 days ago",
+      "priority": "High priority",
+      "summary": "Improve keyboard and screen-reader experiences across key flows; focused testing is especially useful."
+    },
+    {
+      "name": "Release Notes Hub",
+      "owner": "Noah Kim",
+      "status": "On track",
+      "recentActivity": "First release template shared · 1 week ago",
+      "priority": "Low risk",
+      "summary": "Create a consistent home for release updates. Small documentation and feedback contributions are welcome."
+    },
+    {
+      "name": "Starter Templates",
+      "owner": "Mona",
+      "status": "Active",
+      "recentActivity": "Template setup checklist opened for feedback · 1 week ago",
+      "priority": "Medium priority",
+      "summary": "Help new teams get started with practical project templates and copyable setup examples."
+    }
+  ]
+}

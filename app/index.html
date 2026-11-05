@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Project Pulse</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> TEAM OVERVIEW</div>
+        <h1>Project Pulse</h1>
+        <p class="page-subtitle">A clear snapshot of what’s moving, who’s leading, and where contributors can help.</p>
+      </header>
+
+      <section class="project-section" aria-labelledby="projects-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="projects-heading">Projects</h2>
+            <p class="section-description">Current work across Mona’s team</p>
+          </div>
+          <span class="section-label">CONTRIBUTOR VIEW</span>
+        </div>
+        <div id="project-status" class="load-state" role="status" aria-live="polite">Loading projects…</div>
+        <div id="dashboard" class="dashboard" aria-label="Project list"></div>
+      </section>
+    </main>
+
+    <script>
+      const state = document.querySelector("#project-status");
+      const dashboard = document.querySelector("#dashboard");
+
+      function addDetail(card, label, value, kind) {
+        const row = document.createElement("div");
+        row.className = `detail detail-${kind}`;
+        const heading = document.createElement("span");
+        heading.className = "detail-label";
+        heading.textContent = label;
+        const text = document.createElement("span");
+        text.className = "detail-value";
+        text.textContent = value;
+        row.append(heading, text);
+        card.append(row);
+      }
+
+      function renderProject(project) {
+        const card = document.createElement("article");
+        card.className = "project-card";
+        card.tabIndex = 0;
+
+        const top = document.createElement("div");
+        top.className = "card-top";
+        const titleGroup = document.createElement("div");
+        const name = document.createElement("h3");
+        name.className = "project-name";
+        name.textContent = project.name;
+        const owner = document.createElement("p");
+        owner.className = "project-owner";
+        owner.textContent = `Led by ${project.owner}`;
+        titleGroup.append(name, owner);
+
+        const status = document.createElement("span");
+        status.className = "status-badge";
+        status.textContent = project.status;
+        top.append(titleGroup, status);
+        card.append(top);
+
+        const summary = document.createElement("p");
+        summary.className = "project-summary";
+        summary.textContent = project.summary;
+        card.append(summary);
+
+        addDetail(card, "RECENT ACTIVITY", project.recentActivity, "activity");
+        addDetail(card, "PRIORITY / RISK", project.priority, "priority");
+        return card;
+      }
+
+      fetch("project-data.json")
+        .then((response) => {
+          if (!response.ok) throw new Error("Project data could not be loaded.");
+          return response.json();
+        })
+        .then((data) => {
+          if (!Array.isArray(data.projects) || data.projects.length === 0) {
+            throw new Error("No projects are available right now.");
+          }
+          dashboard.replaceChildren(...data.projects.map(renderProject));
+          state.textContent = `${data.projects.length} projects loaded`;
+          state.classList.add("load-state-success");
+        })
+        .catch(() => {
+          state.textContent = "Projects couldn’t be loaded. Please refresh to try again.";
+          state.classList.add("load-state-error");
+        });
+    </script>
+  </body>
+</html>
